@@ -10,7 +10,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        /*if(){
+            Parent root = FXMLLoader.load(getClass().getResource("heightAndWeight.fxml"));
+            primaryStage.setTitle("Weight Helper");
+            primaryStage.setScene(new Scene(root, 720, 480));
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        }else{}*/
+
+        Parent root = FXMLLoader.load(getClass().getResource("heightAndWeight.fxml"));
         primaryStage.setTitle("Weight Helper");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.setResizable(false);

@@ -1,11 +1,14 @@
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class Controller extends heightAndWeightController{
+public class Controller {
+
 
     @FXML
     private ResourceBundle resources;
@@ -17,7 +20,10 @@ public class Controller extends heightAndWeightController{
     private Label currentHaWLable;
 
     @FXML
+    private Label fieldCcal;
+
+    @FXML
     void initialize() {
-       currentHaWLable.setText("Ващ текущий рост и вес: " + Height + " " + Weight);
+
     }
 }

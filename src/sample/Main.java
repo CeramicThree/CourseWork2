@@ -19,7 +19,7 @@ public class Main extends Application {
         }else{}*/
 
         Parent root = FXMLLoader.load(getClass().getResource("heightAndWeight.fxml"));
-        primaryStage.setTitle("Weight Helper");
+        primaryStage.setTitle("Weight Controller");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.setResizable(false);
         primaryStage.show();

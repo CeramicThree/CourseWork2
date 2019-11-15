@@ -7,7 +7,8 @@ class Human {
     private String name;
     private int gender;
     private float ccal;
-    public Human(){
+
+    Human(){
         setWeight(60);
         setHeight(170);
         setAge(18);
@@ -15,6 +16,7 @@ class Human {
         setGender(1);
         ccal = 1800;
     }
+
     public Human(float weight, float height, int age, String name, int gender){
         setWeight(weight);
         setHeight(height);

@@ -1,6 +1,6 @@
 package sample;
 
-import java.awt.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,10 +14,11 @@ import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
+
 public class heightAndWeightController {
     private Human human;
 
-    heightAndWeightController(Human human){
+    public heightAndWeightController(Human human){
         this.human = human;
     }
 
@@ -50,7 +51,26 @@ public class heightAndWeightController {
 
     @FXML
     void initialize() {
-
+        /*
+        fieldWeight.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    fieldWeight.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        fieldHeight.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    fieldHeight.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+*/
         checkMale.setOnAction(actionEvent -> {
             if(checkMale.isSelected()){
                 checkFem.setSelected(false);

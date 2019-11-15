@@ -14,11 +14,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="fieldHeight" layoutX="422.0" layoutY="195.0" prefHeight="45.0" prefWidth="161.0" promptText="Рост" />
+      <TextField fx:id="fieldHeight" layoutX="402.0" layoutY="195.0" prefHeight="45.0" prefWidth="161.0" promptText="Рост" />
       <TextField fx:id="fieldWeight" layoutX="130.0" layoutY="195.0" prefHeight="45.0" prefWidth="161.0" promptText="Вес" />
       <Button fx:id="nextButton" layoutX="319.0" layoutY="368.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="83.0" text="Далее" />
       <TextField fx:id="fieldName" layoutX="130.0" layoutY="125.0" prefHeight="45.0" prefWidth="161.0" promptText="Имя" />
-      <TextField fx:id="fieldAge" layoutX="422.0" layoutY="125.0" prefHeight="45.0" prefWidth="161.0" promptText="Возраст" />
+      <TextField fx:id="fieldAge" layoutX="402.0" layoutY="125.0" prefHeight="45.0" prefWidth="161.0" promptText="Возраст" />
       <CheckBox fx:id="checkMale" layoutX="266.0" layoutY="273.0" mnemonicParsing="false" selected="true" text="Мужчина" />
       <CheckBox fx:id="checkFem" layoutX="402.0" layoutY="273.0" mnemonicParsing="false" text="Женщина" />
    </children>

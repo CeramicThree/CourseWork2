@@ -16,12 +16,13 @@ import javafx.stage.Stage;
 
 
 public class heightAndWeightController {
+    /*
     private Human human;
 
     public heightAndWeightController(Human human){
         this.human = human;
     }
-
+    */
     @FXML
     private ResourceBundle resources;
 
@@ -94,7 +95,7 @@ public class heightAndWeightController {
             }
 
             human.calcCcal();
-
+            System.out.println(human.getCcal());
             nextButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(heightAndWeightController.class.getResource("/sample/sample.fxml"));
@@ -107,6 +108,7 @@ public class heightAndWeightController {
             Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Weight Contoller");
             stage.show();
             stage.setResizable(false);
         });

@@ -5,7 +5,7 @@ class Human {
     private float height;
     private int age;
     private String name;
-    private int gender;
+    private String gender;
     private float ccal;
 
     Human(){
@@ -13,11 +13,11 @@ class Human {
         setHeight(170);
         setAge(18);
         setName("Валера");
-        setGender(1);
+        setGender("Мужчина");
         ccal = 1800;
     }
 
-    public Human(float weight, float height, int age, String name, int gender){
+    public Human(float weight, float height, int age, String name, String gender){
         setWeight(weight);
         setHeight(height);
         setAge(age);
@@ -25,11 +25,11 @@ class Human {
         setGender(gender);
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -74,9 +74,9 @@ class Human {
     }
 
     public void calcCcal(){
-        if(getGender() == 1){
+        if(getGender().equals("Мужчина")){
             setCcal((float) (88.36 + 13.4 * getWeight() + 4.8 * getHeight() - 5.7 * getAge()));
-        }else if (getGender() == 0){
+        }else if (getGender().equals("Женщина")){
             setCcal((float) (447.6 + 9.2 * getWeight() + 3.1 * getHeight() - 4.3 * getAge()));
         }
     }

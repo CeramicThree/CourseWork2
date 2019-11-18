@@ -4,6 +4,7 @@ package sample;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import Database.*;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -72,6 +73,7 @@ public class heightAndWeightController {
             }
         });
 */
+        DBHandler database;
         checkMale.setOnAction(actionEvent -> {
             if(checkMale.isSelected()){
                 checkFem.setSelected(false);
@@ -86,15 +88,19 @@ public class heightAndWeightController {
 
         nextButton.setOnAction(actionEvent -> {
             Human human = new Human(Float.parseFloat(fieldHeight.getText()), Float.parseFloat(fieldWeight.getText()),
-                    Integer.parseInt(fieldAge.getText()), fieldName.getText(), 1);
+                    Integer.parseInt(fieldAge.getText()), fieldName.getText(), "Мужчина");
 
             if(checkMale.isSelected()){
-                human.setGender(1);
+                human.setGender("Мужчина");
             }else if(checkFem.isSelected()){
-                human.setGender(0);
+                human.setGender("Женщина");
             }
-
             human.calcCcal();
+            String query = "USE heroku_a6b4ec6076ccf62; " + "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal) " +
+                    "VALUES (" + human.getName() + ", " + human.getAge() + ", " + human.getWeight() + ", " + human.getHeight()
+                    + ", " + human.getGender() + ", " + human.getCcal() + ");";
+            DBHandler.executeQuery(query);
+
             System.out.println(human.getCcal());
             nextButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();

@@ -1,20 +1,31 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBHandler extends Config {
 
-    Connection connection;
+    private static Connection connection;
+    private static Statement stmt;
+    private static ResultSet rs;
+    private static String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
         Class.forName("com.mysql.jdbc.Driver");
 
         connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
 
         return connection;
+    }
+
+    public static void executeQuery(String query){
+        try {
+            connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            stmt = connection.createStatement();
+            stmt.executeQuery("SET NAMES 'UTF8'");
+            rs = stmt.executeQuery(query);
+        }catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
     }
 
 }

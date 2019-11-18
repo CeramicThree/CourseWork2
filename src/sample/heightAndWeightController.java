@@ -53,6 +53,7 @@ public class heightAndWeightController {
 
     @FXML
     void initialize() {
+
         /*
         fieldWeight.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -73,7 +74,6 @@ public class heightAndWeightController {
             }
         });
 */
-        DBHandler database;
         checkMale.setOnAction(actionEvent -> {
             if(checkMale.isSelected()){
                 checkFem.setSelected(false);
@@ -96,8 +96,9 @@ public class heightAndWeightController {
                 human.setGender("Женщина");
             }
             human.calcCcal();
-            String query = "USE heroku_a6b4ec6076ccf62; " + "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal) " +
-                    "VALUES (" + human.getName() + ", " + human.getAge() + ", " + human.getWeight() + ", " + human.getHeight()
+            System.out.println(human.getName());
+            String query = "USE heroku_a6b4ec6076ccf62;\n" + "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal)\n" +
+                    "VALUES ('" + human.getName() + "' , " + human.getAge() + ", " + human.getWeight() + ", " + human.getHeight()
                     + ", " + human.getGender() + ", " + human.getCcal() + ");";
             DBHandler.executeQuery(query);
 

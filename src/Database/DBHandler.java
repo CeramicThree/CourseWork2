@@ -21,7 +21,6 @@ public class DBHandler extends Config {
         try {
             connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
             stmt = connection.createStatement();
-            stmt.executeQuery("SET NAMES 'UTF8'");
             rs = stmt.executeQuery(query);
         }catch (SQLException sqlEx){
             sqlEx.printStackTrace();

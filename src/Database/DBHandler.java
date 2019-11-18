@@ -21,7 +21,7 @@ public class DBHandler extends Config {
         try {
             connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(query);
+            stmt.executeUpdate(query);
         }catch (SQLException sqlEx){
             sqlEx.printStackTrace();
         }

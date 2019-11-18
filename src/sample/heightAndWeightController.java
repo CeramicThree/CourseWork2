@@ -96,8 +96,8 @@ public class heightAndWeightController {
                 human.setGender("Женщина");
             }
             human.calcCcal();
-            System.out.println(human.getName());
-            String query = "USE heroku_a6b4ec6076ccf62;\n" + "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal)\n" +
+
+            String query = "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal)\n" +
                     "VALUES ('" + human.getName() + "' , " + human.getAge() + ", " + human.getWeight() + ", " + human.getHeight()
                     + ", " + human.getGender() + ", " + human.getCcal() + ");";
             DBHandler.executeQuery(query);

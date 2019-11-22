@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.heightAndWeightController">
+   <children>
+      <Label layoutX="244.0" layoutY="14.0" prefHeight="62.0" prefWidth="279.0" text="Здравствуйте, представьтесь!" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldName" layoutX="130.0" layoutY="125.0" prefHeight="45.0" prefWidth="161.0" promptText="Имя" />
+      <TextField fx:id="fieldAge" layoutX="402.0" layoutY="125.0" prefHeight="45.0" prefWidth="161.0" promptText="Возраст" />
+      <TextField fx:id="fieldWeight" layoutX="130.0" layoutY="195.0" prefHeight="45.0" prefWidth="161.0" promptText="Вес" />
+      <TextField fx:id="fieldHeight" layoutX="402.0" layoutY="195.0" prefHeight="45.0" prefWidth="161.0" promptText="Рост" />
+      <TextField fx:id="fieldLogin" layoutX="130.0" layoutY="260.0" prefHeight="45.0" prefWidth="161.0" promptText="Логин" />
+      <PasswordField fx:id="fieldPass" layoutX="403.0" layoutY="263.0" prefHeight="46.0" prefWidth="162.0" promptText="Пароль" />
+      <Button fx:id="nextButton" layoutX="318.0" layoutY="399.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="83.0" text="Далее" />
+      <CheckBox fx:id="checkMale" layoutX="254.0" layoutY="353.0" mnemonicParsing="false" selected="true" text="Мужчина" />
+      <CheckBox fx:id="checkFem" layoutX="402.0" layoutY="353.0" mnemonicParsing="false" text="Женщина" />
+      <Button fx:id="authButton" layoutX="565.0" layoutY="398.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" text="Уже есть аккаунт" />
+   </children>
+</AnchorPane>

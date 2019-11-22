@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
    <children>
       <Label layoutX="260.0" layoutY="38.0" prefHeight="50.0" prefWidth="109.0" text="Калории" textAlignment="CENTER">
          <font>
@@ -16,7 +17,7 @@
          </font>
       </Label>
       <ProgressBar layoutX="260.0" layoutY="96.0" prefWidth="200.0" progress="0.0" />
-      <DatePicker layoutX="272.0" layoutY="132.0" />
+      <DatePicker fx:id="dateValue" layoutX="272.0" layoutY="132.0" />
       <Label layoutX="133.0" layoutY="183.0" prefHeight="50.0" prefWidth="109.0" text="Завтрак" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Italic" size="25.0" />
@@ -54,5 +55,6 @@
             <Font name="Segoe UI Italic" size="12.0" />
          </font>
       </Label>
+      <Button layoutX="594.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="78.0" text="Поесть" />
    </children>
 </AnchorPane>

@@ -1,4 +1,4 @@
-package sample;
+package Controllers;
 
 
 import java.io.IOException;
@@ -6,7 +6,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import Database.*;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,16 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import sample.Human;
 
 
 public class heightAndWeightController {
-    /*
-    private Human human;
 
-    public heightAndWeightController(Human human){
-        this.human = human;
-    }
-    */
     @FXML
     private ResourceBundle resources;
 
@@ -46,15 +44,24 @@ public class heightAndWeightController {
     private Button nextButton;
 
     @FXML
+    private Button authButton;
+
+    @FXML
     private CheckBox checkMale;
 
     @FXML
     private CheckBox checkFem;
 
     @FXML
+    private PasswordField fieldPass;
+
+    @FXML
+    private TextField fieldLogin;
+
+    @FXML
     void initialize() {
 
-        /*
+
         fieldWeight.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
@@ -73,7 +80,16 @@ public class heightAndWeightController {
                 }
             }
         });
-*/
+        fieldAge.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    fieldAge.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
         checkMale.setOnAction(actionEvent -> {
             if(checkMale.isSelected()){
                 checkFem.setSelected(false);
@@ -88,24 +104,20 @@ public class heightAndWeightController {
 
         nextButton.setOnAction(actionEvent -> {
             Human human = new Human(Float.parseFloat(fieldHeight.getText()), Float.parseFloat(fieldWeight.getText()),
-                    Integer.parseInt(fieldAge.getText()), fieldName.getText(), "Мужчина");
+                    Integer.parseInt(fieldAge.getText()), fieldName.getText(), "Male", Integer.parseInt(fieldPass.getText()), fieldLogin.getText());
 
             if(checkMale.isSelected()){
-                human.setGender("Мужчина");
+                human.setGender("Male");
             }else if(checkFem.isSelected()){
-                human.setGender("Женщина");
+                human.setGender("Female");
             }
             human.calcCcal();
 
-            String query = "INSERT INTO users (Name, Age, Weight, Height, Gender, Ccal)\n" +
-                    "VALUES ('" + human.getName() + "' , " + human.getAge() + ", " + human.getWeight() + ", " + human.getHeight()
-                    + ", " + human.getGender() + ", " + human.getCcal() + ");";
-            DBHandler.executeQuery(query);
+            DBHandler.insertIntoUsers(human);
 
-            System.out.println(human.getCcal());
             nextButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(heightAndWeightController.class.getResource("/sample/sample.fxml"));
+            loader.setLocation(heightAndWeightController.class.getResource("/FXML/sample.fxml"));
             try {
                 loader.load();
             }catch (IOException e){
@@ -113,11 +125,34 @@ public class heightAndWeightController {
             }
 
             Parent root = loader.getRoot();
+
+            Controller controller = loader.getController();
+            controller.transferUser(human);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Weight Contoller");
             stage.show();
             stage.setResizable(false);
+        });
+
+        authButton.setOnAction(actionEvent -> {
+            authButton.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(heightAndWeightController.class.getResource("/FXML/auth.fxml"));
+            try {
+                loader.load();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Weight Contoller");
+            stage.show();
+            stage.setResizable(false);
+
+
         });
     }
 }

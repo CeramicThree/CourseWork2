@@ -59,14 +59,14 @@ public class DBHandler extends Config {
             String query = "SELECT * FROM users WHERE Login = '" + login + "' AND Password = " + password + ";";
             rs = stmt.executeQuery(query);
             while (rs.next()) {
-                human.setName(rs.getString("Name"));
-                human.setAge(Integer.parseInt(rs.getString("Age")));
-                human.setWeight(Float.parseFloat(rs.getString("Weight")));
-                human.setHeight(Float.parseFloat(rs.getString("Height")));
-                human.setCcal(Float.parseFloat(rs.getString("Ccal")));
-                human.setLogin(rs.getString("Login"));
-                human.setPassword(Integer.parseInt(rs.getString("Password")));
-                human.setGender(rs.getString("Gender"));
+                human.setName(rs.getString(2));
+                human.setAge(Integer.parseInt(rs.getString(3)));
+                human.setWeight(Float.parseFloat(rs.getString(4)));
+                human.setHeight(Float.parseFloat(rs.getString(5)));
+                human.setCcal(Float.parseFloat(rs.getString(7)));
+                human.setLogin(rs.getString(8));
+                human.setPassword(Integer.parseInt(rs.getString(9)));
+                human.setGender(rs.getString(6));
             }
         }catch (NullPointerException error) {
             return null;

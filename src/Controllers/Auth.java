@@ -1,18 +1,19 @@
 package Controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Database.DBHandler;
+import com.sun.javafx.css.StyleCache;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import sample.Human;
 
@@ -60,6 +61,8 @@ public class Auth {
 
     @FXML
     void initialize() {
+        nextButton.setDefaultButton(true);
+
         authButton.setOnAction(actionEvent -> {
             authButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
@@ -81,8 +84,12 @@ public class Auth {
             login = loginField.getText();
             password = Integer.parseInt(passwordField.getText());
             human = DBHandler.authorization(login, password, human);
-            if(human == null){
-                errorLabel.setVisible(true);
+            if(human.getCcal() == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText(null);
+                alert.setContentText("Неверный логин или пароль");
+                alert.showAndWait();
             }else{
                 nextButton.getScene().getWindow().hide();
                 FXMLLoader loader = new FXMLLoader();
@@ -106,6 +113,7 @@ public class Auth {
             }
 
         });
+
     }
 }
 

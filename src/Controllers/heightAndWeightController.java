@@ -102,6 +102,7 @@ public class heightAndWeightController {
             }
         });
 
+        nextButton.setDefaultButton(true);
         nextButton.setOnAction(actionEvent -> {
             Human human = new Human(Float.parseFloat(fieldHeight.getText()), Float.parseFloat(fieldWeight.getText()),
                     Integer.parseInt(fieldAge.getText()), fieldName.getText(), "Male", Integer.parseInt(fieldPass.getText()), fieldLogin.getText());

@@ -16,7 +16,7 @@ public class Human {
         setAge(18);
         setName("Valera");
         setGender("Male");
-        ccal = 1800;
+        ccal = 0;
         setPassword(1111);
         setLogin("Log");
     }

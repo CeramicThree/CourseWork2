@@ -3,49 +3,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
    <children>
-      <Label layoutX="260.0" layoutY="38.0" prefHeight="50.0" prefWidth="109.0" text="Калории" textAlignment="CENTER">
+      <Label layoutX="95.0" layoutY="42.0" prefHeight="50.0" prefWidth="109.0" text="Калории:" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Italic" size="25.0" />
          </font>
       </Label>
-      <ProgressBar layoutX="260.0" layoutY="96.0" prefWidth="200.0" progress="0.0" />
-      <DatePicker fx:id="dateValue" layoutX="272.0" layoutY="132.0" />
-      <Label layoutX="133.0" layoutY="183.0" prefHeight="50.0" prefWidth="109.0" text="Завтрак" textAlignment="CENTER">
+      <ProgressBar fx:id="progressBar" layoutX="240.0" layoutY="93.0" prefWidth="200.0" progress="0.0" />
+      <DatePicker fx:id="dateValue" layoutX="253.0" layoutY="130.0" />
+      <Label layoutX="95.0" layoutY="184.0" prefHeight="50.0" prefWidth="109.0" text="Завтрак" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Italic" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="133.0" layoutY="270.0" prefHeight="50.0" prefWidth="109.0" text="Обед" textAlignment="CENTER">
+      <Label layoutX="95.0" layoutY="270.0" prefHeight="50.0" prefWidth="109.0" text="Обед" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Italic" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="133.0" layoutY="355.0" prefHeight="50.0" prefWidth="109.0" text="Ужин" textAlignment="CENTER">
+      <Label layoutX="95.0" layoutY="356.0" prefHeight="50.0" prefWidth="109.0" text="Ужин" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Italic" size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="260.0" layoutY="183.0" prefHeight="71.0" prefWidth="200.0">
+      <ScrollPane fx:id="scrollBreakfast" layoutX="227.0" layoutY="184.0" prefHeight="71.0" prefWidth="200.0">
          <content>
-            <VBox prefHeight="200.0" prefWidth="185.0" />
+            <VBox fx:id="vboxBreakfast" prefHeight="200.0" prefWidth="185.0" />
          </content></ScrollPane>
-      <ScrollPane layoutX="260.0" layoutY="270.0" prefHeight="71.0" prefWidth="200.0">
+      <ScrollPane fx:id="scroolDinner" layoutX="227.0" layoutY="270.0" prefHeight="71.0" prefWidth="200.0">
          <content>
-            <VBox prefHeight="200.0" prefWidth="185.0" />
+            <VBox fx:id="vboxDinner" prefHeight="200.0" prefWidth="185.0" />
          </content></ScrollPane>
-      <ScrollPane layoutX="260.0" layoutY="355.0" prefHeight="71.0" prefWidth="200.0">
+      <ScrollPane fx:id="scroolLateDinner" layoutX="227.0" layoutY="356.0" prefHeight="71.0" prefWidth="200.0">
          <content>
-            <VBox prefHeight="200.0" prefWidth="185.0" />
-         </content></ScrollPane>
-      <Label fx:id="fieldCcal" layoutX="390.0" layoutY="35.0" prefHeight="57.0" prefWidth="117.0" text="0/0">
+            <VBox fx:id="vboxLateDinner" prefHeight="200.0" prefWidth="185.0" />
+         </content>
+      </ScrollPane>
+      <Label fx:id="fieldCcal" layoutX="242.0" layoutY="38.0" prefHeight="57.0" prefWidth="225.0" text="0/0">
          <font>
             <Font name="System Italic" size="19.0" />
          </font>
@@ -55,6 +59,35 @@
             <Font name="Segoe UI Italic" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="594.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="78.0" text="Поесть" />
+      <Button fx:id="buttonMeals" layoutX="625.0" layoutY="391.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="78.0" text="Еда" />
+      <AnchorPane fx:id="secondPane" layoutX="482.0" layoutY="44.0" prefHeight="329.0" prefWidth="225.0" style="-fx-border-color: #9a9a9a; -fx-border-radius: 10;">
+         <children>
+            <Button fx:id="buttonAdd" layoutX="139.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Добавить">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonDelete" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Удалить">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <MenuButton fx:id="menuButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Выберите приём пищи">
+              <items>
+                <MenuItem fx:id="menuBreakfast" mnemonicParsing="false" text="Завтрак" />
+                <MenuItem fx:id="menuDinner" mnemonicParsing="false" text="Обед" />
+                  <MenuItem fx:id="menuLateDinner" mnemonicParsing="false" text="Ужин" />
+              </items>
+            </MenuButton>
+            <TextField fx:id="fieldNewProduct" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="117.0" promptText="Название" />
+            <TextField fx:id="feildEnergyValue" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="117.0" promptText="Калорийность" />
+            <ScrollPane layoutX="14.0" layoutY="108.0" prefHeight="212.0" prefWidth="117.0">
+               <content>
+                  <VBox fx:id="vboxMeals" prefHeight="429.0" prefWidth="115.0" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="buttonEat" layoutX="139.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Съесть" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

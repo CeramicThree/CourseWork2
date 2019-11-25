@@ -1,8 +1,16 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Food {
     private String name;
     private float energyValue;
+    public List<Food> foodList = new ArrayList<>();
+    public Food(){
+        setName("Еда");
+        setEnergyValue(100);
+    }
 
     public Food(String name, float energyValue){
         setName(name);

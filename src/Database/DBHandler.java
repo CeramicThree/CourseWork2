@@ -1,6 +1,8 @@
 package Database;
 
 import java.sql.*;
+import java.util.List;
+
 import sample.*;
 public class DBHandler extends Config {
 
@@ -38,20 +40,7 @@ public class DBHandler extends Config {
             sqlEx.printStackTrace();
         }
     }
-    public static Object selectFromUsers(String columnName, String login, Human human){
 
-        try {
-            connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
-            stmt = connection.createStatement();
-            String query = "SELECT " + columnName + " FROM users WHERE Login = \"" + login + "\"";
-            rs = stmt.executeQuery(query);
-
-
-        }catch (SQLException sqlEx){
-            sqlEx.printStackTrace();
-        }
-        return 0;
-    }
     public static Human authorization(String login, int password, Human human){
         try {
             connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
@@ -75,6 +64,51 @@ public class DBHandler extends Config {
         }
         return human;
     }
+
+    public static void insertIntoFood(Food food){
+        try {
+            connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            stmt = connection.createStatement();
+            String query = "INSERT INTO food (Name, EnergyValue)\n" +
+                    "VALUES (\"" + food.getName() + "\" ," + food.getEnergyValue() + ");";
+            stmt.executeUpdate(query);
+        }catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+    }
+
+    public static List<Food> selectFromFood(Food _food){
+        Food food = new Food();
+        try {
+            connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            stmt = connection.createStatement();
+            String query = "SELECT * FROM food;";
+            rs = stmt.executeQuery(query);
+            while (rs.next()){
+                _food = new Food(rs.getString(2), Float.parseFloat(rs.getString(3)));
+                food.foodList.add(_food);
+            }
+
+        }catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }catch (NullPointerException ex){
+            return null;
+        }
+        return food.foodList;
+    }
+
+    public static void deleteFromFood(String where){
+        try {
+            connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            stmt = connection.createStatement();
+            String query = "DELETE FROM food WHERE Name = '" + where + "';";
+            stmt.executeUpdate(query);
+        }catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+    }
+
+
 
 
 

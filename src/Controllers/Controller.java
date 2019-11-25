@@ -16,11 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import sample.Food;
 import sample.Human;
+import Media.Audio;
 
 public class Controller {
     public Object select = null;
     public Human human = new Human();
     private float curentCcal = 0;
+    private Food food;
     public List<CheckBox> mealList = new ArrayList<>();
     public List<Food> foodList = new ArrayList<>();
 
@@ -105,13 +107,34 @@ public class Controller {
     @FXML
     private AnchorPane secondPane;
 
+    @FXML
+    private Button imageButton;
+
+    @FXML
+    private Button audioButton;
 
     @FXML
     void initialize() {
+        foodList = DBHandler.selectFromFood(food);
+        /*for (int i = 0; i < foodList.size(); i++){
+            vboxMeals.getChildren().addAll(createCheckBox(foodList.get(i).getName(), foodList.get(i).getEnergyValue()));
+        }
+        */
         secondPane.setVisible(false);
         dateValue.setValue(LocalDate.now());
         dateValue.setEditable(false);
 
+        audioButton.setOnAction(actionEvent -> {
+            String audioUrl = "E:\\JavaProjects\\CourseWork2\\src\\Assets\\naruto.mp3";
+            Audio audio = new Audio(audioUrl);
+            boolean check = false;
+            if(check = true) {
+                audioButton.setText("Stop");
+                audio.stopAudio(audioUrl);
+            }
+            audio.playAudio(audioUrl);
+            audioButton.setText("Play");
+        });
 
         buttonMeals.setOnAction(actionEvent -> {
             if(secondPane.isVisible()){
@@ -134,24 +157,38 @@ public class Controller {
         buttonAdd.setOnAction(actionEvent -> {
             String name = fieldNewProduct.getText();
             float energyValue = Float.parseFloat(feildEnergyValue.getText());
+            Food food = new Food(name, energyValue);
+            DBHandler.insertIntoFood(food);
             vboxMeals.getChildren().add(createCheckBox(name, energyValue));
         });
 
         buttonDelete.setOnAction(actionEvent -> {
             for(int i = 0; i < mealList.size(); i++){
                 if(mealList.get(i).isSelected()){
+                    DBHandler.deleteFromFood(foodList.get(i).getName());
                     vboxMeals.getChildren().remove(mealList.get(i));
+                    mealList.remove(i);
+
                 }
             }
         });
 
         buttonEat.setOnAction(actionEvent -> {
+            if(progressBar.getProgress() >= 1){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Норма превышена");
+                alert.setHeaderText(null);
+                alert.setContentText("Зря Вы это съели...");
+                alert.showAndWait();
+            }
+
             Label label = new Label();
             if(menuButton.getText().equals("Завтрак")){
                 for(int i = 0; i < mealList.size(); i++){
                     if(mealList.get(i).isSelected()){
                         label.setText(mealList.get(i).getText());
-                        vboxBreakfast.getChildren().add(label);
+                        label.setStyle("-fx-font-family: Calibri;");
+                        vboxBreakfast.getChildren().addAll(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
@@ -159,7 +196,8 @@ public class Controller {
                 for(int i = 0; i < mealList.size(); i++) {
                     if (mealList.get(i).isSelected()) {
                         label.setText(mealList.get(i).getText());
-                        vboxDinner.getChildren().add(label);
+                        label.setStyle("-fx-font-family: Calibri;");
+                        vboxDinner.getChildren().addAll(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
@@ -167,14 +205,23 @@ public class Controller {
                 for(int i = 0; i < mealList.size(); i++) {
                     if (mealList.get(i).isSelected()) {
                         label.setText(mealList.get(i).getText());
-                        vboxLateDinner.getChildren().add(label);
+                        label.setStyle("-fx-font-family: Calibri;");
+                        vboxLateDinner.getChildren().addAll(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
             }
             fieldCcal.setText(curentCcal + "/" + human.getCcal());
+            progressBar.setProgress(curentCcal/human.getCcal());
         });
 
+        imageButton.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Секрет разблокирован");
+            alert.setHeaderText(null);
+            alert.setContentText("Поздравляю с днём рождения, Деда, сегодня тебе 54 года!");
+            alert.showAndWait();
+        });
 
 
 
@@ -201,5 +248,7 @@ public class Controller {
         checkBox.setText(name + "\n" + EnergyValue + " Ccal");
         return checkBox;
     }
+
+
 
 }

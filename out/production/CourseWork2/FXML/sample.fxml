@@ -8,32 +8,39 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="717.0" style="-fx-background-color: linear-gradient(to top left, #ffffff, #b8ff95);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
    <children>
-      <Label layoutX="95.0" layoutY="42.0" prefHeight="50.0" prefWidth="109.0" text="Калории:" textAlignment="CENTER">
+      <ImageView accessibleRole="BUTTON" blendMode="GREEN" fitHeight="81.0" fitWidth="72.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/pngtree-vector-apple-icon-png-image_924774.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="95.0" layoutY="42.0" prefHeight="50.0" prefWidth="109.0" text="Калории:" textAlignment="CENTER" textFill="#00280a">
          <font>
-            <Font name="Segoe UI Italic" size="25.0" />
+            <Font name="Corbel Light" size="25.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="progressBar" layoutX="240.0" layoutY="93.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar fx:id="progressBar" layoutX="240.0" layoutY="93.0" prefWidth="200.0" progress="0.0" style="-fx-accent: #00e439;" />
       <DatePicker fx:id="dateValue" layoutX="253.0" layoutY="130.0" />
       <Label layoutX="95.0" layoutY="184.0" prefHeight="50.0" prefWidth="109.0" text="Завтрак" textAlignment="CENTER">
          <font>
-            <Font name="Segoe UI Italic" size="25.0" />
+            <Font name="Corbel Light Italic" size="25.0" />
          </font>
       </Label>
       <Label layoutX="95.0" layoutY="270.0" prefHeight="50.0" prefWidth="109.0" text="Обед" textAlignment="CENTER">
          <font>
-            <Font name="Segoe UI Italic" size="25.0" />
+            <Font name="Corbel Light" size="25.0" />
          </font>
       </Label>
       <Label layoutX="95.0" layoutY="356.0" prefHeight="50.0" prefWidth="109.0" text="Ужин" textAlignment="CENTER">
          <font>
-            <Font name="Segoe UI Italic" size="25.0" />
+            <Font name="Corbel Light" size="25.0" />
          </font>
       </Label>
       <ScrollPane fx:id="scrollBreakfast" layoutX="227.0" layoutY="184.0" prefHeight="71.0" prefWidth="200.0">
@@ -51,7 +58,7 @@
       </ScrollPane>
       <Label fx:id="fieldCcal" layoutX="242.0" layoutY="38.0" prefHeight="57.0" prefWidth="225.0" text="0/0">
          <font>
-            <Font name="System Italic" size="19.0" />
+            <Font name="Corbel Light" size="27.0" />
          </font>
       </Label>
       <Label fx:id="currentHaWLable" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="271.0" text="" textAlignment="CENTER">
@@ -59,35 +66,37 @@
             <Font name="Segoe UI Italic" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="buttonMeals" layoutX="625.0" layoutY="391.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="78.0" text="Еда" />
-      <AnchorPane fx:id="secondPane" layoutX="482.0" layoutY="44.0" prefHeight="329.0" prefWidth="225.0" style="-fx-border-color: #9a9a9a; -fx-border-radius: 10;">
+      <Button fx:id="buttonMeals" layoutX="625.0" layoutY="391.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="78.0" style="-fx-background-color: #96ff9d;" text="Еда" />
+      <AnchorPane fx:id="secondPane" layoutX="482.0" layoutY="44.0" prefHeight="329.0" prefWidth="225.0" style="-fx-border-color: #58fb5b; -fx-border-radius: 10;">
          <children>
-            <Button fx:id="buttonAdd" layoutX="139.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Добавить">
+            <Button fx:id="buttonAdd" layoutX="139.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #96ff9d;" text="Добавить">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="buttonDelete" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Удалить">
+            <Button fx:id="buttonDelete" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #96ff9d;" text="Удалить">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <MenuButton fx:id="menuButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Выберите приём пищи">
+            <MenuButton fx:id="menuButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: #96ff9d;" text="Выберите приём пищи">
               <items>
                 <MenuItem fx:id="menuBreakfast" mnemonicParsing="false" text="Завтрак" />
                 <MenuItem fx:id="menuDinner" mnemonicParsing="false" text="Обед" />
                   <MenuItem fx:id="menuLateDinner" mnemonicParsing="false" text="Ужин" />
               </items>
             </MenuButton>
-            <TextField fx:id="fieldNewProduct" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="117.0" promptText="Название" />
-            <TextField fx:id="feildEnergyValue" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="117.0" promptText="Калорийность" />
+            <TextField fx:id="fieldNewProduct" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="117.0" promptText="Название" style="-fx-background-color: #96ff9d;" />
+            <TextField fx:id="feildEnergyValue" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="117.0" promptText="Калорийность" style="-fx-background-color: #96ff9d;" />
             <ScrollPane layoutX="14.0" layoutY="108.0" prefHeight="212.0" prefWidth="117.0">
                <content>
                   <VBox fx:id="vboxMeals" prefHeight="429.0" prefWidth="115.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="buttonEat" layoutX="139.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Съесть" />
+            <Button fx:id="buttonEat" layoutX="139.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #96ff9d;" text="Съесть" />
          </children>
       </AnchorPane>
+      <Button fx:id="imageButton" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" opacity="0.0" prefHeight="71.0" prefWidth="71.0" text="Button" />
+      <Button fx:id="audioButton" layoutX="651.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #96ff9d;" text="Play" />
    </children>
 </AnchorPane>

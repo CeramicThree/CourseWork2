@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javazoom.jl.decoder.JavaLayerException;
 import sample.Food;
 import sample.Human;
 import Media.Audio;
@@ -114,12 +116,27 @@ public class Controller {
     private Button audioButton;
 
     @FXML
+    private Button errorfinderButton;
+
+    @FXML
     void initialize() {
+
+        errorfinderButton.setOnAction(actionEvent -> {
+            for(int i = 0; i < foodList.size(); i++) {
+                System.out.println(foodList.get(i).getName());
+            }
+        });
+
+
+
         foodList = DBHandler.selectFromFood(food);
         /*for (int i = 0; i < foodList.size(); i++){
             vboxMeals.getChildren().addAll(createCheckBox(foodList.get(i).getName(), foodList.get(i).getEnergyValue()));
         }
-        */
+
+         */
+
+
         secondPane.setVisible(false);
         dateValue.setValue(LocalDate.now());
         dateValue.setEditable(false);
@@ -128,12 +145,24 @@ public class Controller {
             String audioUrl = "E:\\JavaProjects\\CourseWork2\\src\\Assets\\naruto.mp3";
             Audio audio = new Audio(audioUrl);
             boolean check = false;
-            if(check = true) {
+           /* if(check = true){
+                try {
+                    //audio.stopPlay();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                audioButton.setText("Play");
+            }else {
+
+            */
+                try {
+                    audio.playAudio(audioUrl);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 audioButton.setText("Stop");
-                audio.stopAudio(audioUrl);
-            }
-            audio.playAudio(audioUrl);
-            audioButton.setText("Play");
+                check = true;
+
         });
 
         buttonMeals.setOnAction(actionEvent -> {
@@ -165,10 +194,11 @@ public class Controller {
         buttonDelete.setOnAction(actionEvent -> {
             for(int i = 0; i < mealList.size(); i++){
                 if(mealList.get(i).isSelected()){
+                    System.out.println(foodList.get(i).getName());
                     DBHandler.deleteFromFood(foodList.get(i).getName());
                     vboxMeals.getChildren().remove(mealList.get(i));
+                    foodList.remove(i);
                     mealList.remove(i);
-
                 }
             }
         });

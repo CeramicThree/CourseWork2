@@ -21,12 +21,10 @@ import sample.Human;
 import Media.Audio;
 
 public class Controller {
-    public Object select = null;
     public Human human = new Human();
     private float curentCcal = 0;
-    private Food food;
-    public List<CheckBox> mealList = new ArrayList<>();
-    public List<Food> foodList = new ArrayList<>();
+    private List<CheckBox> mealList = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
 
     public float getCurentCcal() {
         return curentCcal;
@@ -121,20 +119,17 @@ public class Controller {
     @FXML
     void initialize() {
 
-        errorfinderButton.setOnAction(actionEvent -> {
-            for(int i = 0; i < foodList.size(); i++) {
-                System.out.println(foodList.get(i).getName());
-            }
-        });
-
-
-
-        foodList = DBHandler.selectFromFood(food);
-        /*for (int i = 0; i < foodList.size(); i++){
-            vboxMeals.getChildren().addAll(createCheckBox(foodList.get(i).getName(), foodList.get(i).getEnergyValue()));
+        foodList = DBHandler.selectFromFood();
+        for(int i = 0; i < foodList.size(); i++){
+            mealList.add(createCheckBox(foodList.get(i)));
+            vboxMeals.getChildren().add(createCheckBox(foodList.get(i)));
         }
 
-         */
+        errorfinderButton.setOnAction(actionEvent -> {
+            for(int i = 0; i < mealList.size(); i++) {
+                System.out.println(mealList.get(i).getText());
+            }
+        });
 
 
         secondPane.setVisible(false);
@@ -145,23 +140,13 @@ public class Controller {
             String audioUrl = "E:\\JavaProjects\\CourseWork2\\src\\Assets\\naruto.mp3";
             Audio audio = new Audio(audioUrl);
             boolean check = false;
-           /* if(check = true){
-                try {
-                    //audio.stopPlay();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                audioButton.setText("Play");
-            }else {
-
-            */
-                try {
-                    audio.playAudio(audioUrl);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                audioButton.setText("Stop");
-                check = true;
+            try {
+                audio.playAudio(audioUrl);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            audioButton.setText("Stop");
+            check = true;
 
         });
 
@@ -188,13 +173,13 @@ public class Controller {
             float energyValue = Float.parseFloat(feildEnergyValue.getText());
             Food food = new Food(name, energyValue);
             DBHandler.insertIntoFood(food);
-            vboxMeals.getChildren().add(createCheckBox(name, energyValue));
+            mealList.add(createCheckBox(food));
+            vboxMeals.getChildren().add(createCheckBox(food));
         });
 
         buttonDelete.setOnAction(actionEvent -> {
             for(int i = 0; i < mealList.size(); i++){
                 if(mealList.get(i).isSelected()){
-                    System.out.println(foodList.get(i).getName());
                     DBHandler.deleteFromFood(foodList.get(i).getName());
                     vboxMeals.getChildren().remove(mealList.get(i));
                     foodList.remove(i);
@@ -212,31 +197,34 @@ public class Controller {
                 alert.showAndWait();
             }
 
-            Label label = new Label();
+
             if(menuButton.getText().equals("Завтрак")){
                 for(int i = 0; i < mealList.size(); i++){
                     if(mealList.get(i).isSelected()){
+                        Label label = new Label();
                         label.setText(mealList.get(i).getText());
                         label.setStyle("-fx-font-family: Calibri;");
-                        vboxBreakfast.getChildren().addAll(label);
+                        vboxBreakfast.getChildren().add(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
             }else if(menuButton.getText().equals("Обед")){
                 for(int i = 0; i < mealList.size(); i++) {
                     if (mealList.get(i).isSelected()) {
+                        Label label = new Label();
                         label.setText(mealList.get(i).getText());
                         label.setStyle("-fx-font-family: Calibri;");
-                        vboxDinner.getChildren().addAll(label);
+                        vboxDinner.getChildren().add(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
             }else if(menuButton.getText().equals("Ужин")){
                 for(int i = 0; i < mealList.size(); i++) {
                     if (mealList.get(i).isSelected()) {
+                        Label label = new Label();
                         label.setText(mealList.get(i).getText());
                         label.setStyle("-fx-font-family: Calibri;");
-                        vboxLateDinner.getChildren().addAll(label);
+                        vboxLateDinner.getChildren().add(label);
                         curentCcal += foodList.get(i).getEnergyValue();
                     }
                 }
@@ -270,15 +258,10 @@ public class Controller {
         fieldCcal.setText(curentCcal + "/" + human.getCcal());
     }
 
-    public CheckBox createCheckBox(String name, float EnergyValue){
+    public CheckBox createCheckBox(Food food){
         CheckBox checkBox = new CheckBox();
-        Food food = new Food(name, EnergyValue);
-        foodList.add(food);
-        mealList.add(checkBox);
-        checkBox.setText(name + "\n" + EnergyValue + " Ccal");
+        checkBox.setText(food.getName() + "\n" + food.getEnergyValue() + " Ccal");
         return checkBox;
     }
-
-
 
 }

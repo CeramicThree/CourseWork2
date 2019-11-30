@@ -77,24 +77,22 @@ public class DBHandler extends Config {
         }
     }
 
-    public static List<Food> selectFromFood(Food _food){
-        Food food = new Food();
+    public static List<Food> selectFromFood(){
         try {
             connection = DriverManager.getConnection(connectionString, dbUser, dbPass);
             stmt = connection.createStatement();
             String query = "SELECT * FROM food;";
             rs = stmt.executeQuery(query);
             while (rs.next()){
-                _food = new Food(rs.getString(2), Float.parseFloat(rs.getString(3)));
-                food.foodList.add(_food);
+                Food _food = new Food(rs.getString(2), Float.parseFloat(rs.getString(3)));
+                Food.foodList.add(_food);
             }
-
         }catch (SQLException sqlEx){
             sqlEx.printStackTrace();
         }catch (NullPointerException ex){
             return null;
         }
-        return food.foodList;
+        return Food.foodList;
     }
 
     public static void deleteFromFood(String where){

@@ -118,11 +118,12 @@ public class Controller {
 
     @FXML
     void initialize() {
+        errorfinderButton.setVisible(false);
 
         foodList = DBHandler.selectFromFood();
         for(int i = 0; i < foodList.size(); i++){
             mealList.add(createCheckBox(foodList.get(i)));
-            vboxMeals.getChildren().add(createCheckBox(foodList.get(i)));
+            vboxMeals.getChildren().add(mealList.get(i));
         }
 
         errorfinderButton.setOnAction(actionEvent -> {
@@ -173,8 +174,10 @@ public class Controller {
             float energyValue = Float.parseFloat(feildEnergyValue.getText());
             Food food = new Food(name, energyValue);
             DBHandler.insertIntoFood(food);
-            mealList.add(createCheckBox(food));
-            vboxMeals.getChildren().add(createCheckBox(food));
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(food.getName() + "\n" + food.getEnergyValue() + " Ccal");
+            mealList.add(checkBox);
+            vboxMeals.getChildren().add(checkBox);
         });
 
         buttonDelete.setOnAction(actionEvent -> {
@@ -198,36 +201,40 @@ public class Controller {
             }
 
 
-            if(menuButton.getText().equals("Завтрак")){
-                for(int i = 0; i < mealList.size(); i++){
-                    if(mealList.get(i).isSelected()){
-                        Label label = new Label();
-                        label.setText(mealList.get(i).getText());
-                        label.setStyle("-fx-font-family: Calibri;");
-                        vboxBreakfast.getChildren().add(label);
-                        curentCcal += foodList.get(i).getEnergyValue();
+            switch (menuButton.getText()) {
+                case "Завтрак":
+                    for (int i = 0; i < mealList.size(); i++) {
+                        if (mealList.get(i).isSelected()) {
+                            Label label = new Label();
+                            label.setText(mealList.get(i).getText());
+                            label.setStyle("-fx-font-family: Calibri;");
+                            vboxBreakfast.getChildren().add(label);
+                            curentCcal += foodList.get(i).getEnergyValue();
+                        }
                     }
-                }
-            }else if(menuButton.getText().equals("Обед")){
-                for(int i = 0; i < mealList.size(); i++) {
-                    if (mealList.get(i).isSelected()) {
-                        Label label = new Label();
-                        label.setText(mealList.get(i).getText());
-                        label.setStyle("-fx-font-family: Calibri;");
-                        vboxDinner.getChildren().add(label);
-                        curentCcal += foodList.get(i).getEnergyValue();
+                    break;
+                case "Обед":
+                    for (int i = 0; i < mealList.size(); i++) {
+                        if (mealList.get(i).isSelected()) {
+                            Label label = new Label();
+                            label.setText(mealList.get(i).getText());
+                            label.setStyle("-fx-font-family: Calibri;");
+                            vboxDinner.getChildren().add(label);
+                            curentCcal += foodList.get(i).getEnergyValue();
+                        }
                     }
-                }
-            }else if(menuButton.getText().equals("Ужин")){
-                for(int i = 0; i < mealList.size(); i++) {
-                    if (mealList.get(i).isSelected()) {
-                        Label label = new Label();
-                        label.setText(mealList.get(i).getText());
-                        label.setStyle("-fx-font-family: Calibri;");
-                        vboxLateDinner.getChildren().add(label);
-                        curentCcal += foodList.get(i).getEnergyValue();
+                    break;
+                case "Ужин":
+                    for (int i = 0; i < mealList.size(); i++) {
+                        if (mealList.get(i).isSelected()) {
+                            Label label = new Label();
+                            label.setText(mealList.get(i).getText());
+                            label.setStyle("-fx-font-family: Calibri;");
+                            vboxLateDinner.getChildren().add(label);
+                            curentCcal += foodList.get(i).getEnergyValue();
+                        }
                     }
-                }
+                    break;
             }
             fieldCcal.setText(curentCcal + "/" + human.getCcal());
             progressBar.setProgress(curentCcal/human.getCcal());
@@ -245,7 +252,7 @@ public class Controller {
 
     }
 
-    public void transferUser(Human _human){
+    void transferUser(Human _human){
         human.setName(_human.getName());
         human.setAge(_human.getAge());
         human.setWeight(_human.getWeight());
@@ -258,7 +265,7 @@ public class Controller {
         fieldCcal.setText(curentCcal + "/" + human.getCcal());
     }
 
-    public CheckBox createCheckBox(Food food){
+    private CheckBox createCheckBox(Food food){
         CheckBox checkBox = new CheckBox();
         checkBox.setText(food.getName() + "\n" + food.getEnergyValue() + " Ccal");
         return checkBox;
